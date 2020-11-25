@@ -1,0 +1,94 @@
+li load immediate
+Use - li $a0,10
+la load address
+Use - la $a0,mymsg
+    - la $t0,4($t1)
+move - move data
+Use - move $target,$source
+add $target,$reg1,$reg2
+sub $target,$large,$small
+
+$v0 register
+LOAD with 1 - Display Integer stored in $a0
+LOAD with 2 - Display Float stored in $f12
+LOAD with 3 - Display double stored in $f12
+LOAD with 4 - Display String stored in $a0
+LOAD with 5 - Take Integer input and store in $v0
+LOAD with 6 - Take Float input and store in $f0
+LOAD with 7 - Take Double input and store in $f0
+LOAD with 8 - Take string input and store in $a0
+LOAD with 9 - $a0 = input, address in $v0
+LOAD with 10 - Terminate
+
+l.s load immediate float
+Use - l.s $f12,10.0
+
+l.d load immediate double
+Use - l.d $f12,10.0
+
+cvt.d.s REG A, REG B
+Convert float to double. Float in Reg B
+cvt.s.d REG A, REG B
+Convert double to float. Double in reg B
+
+mov.s REG A,REG B
+move float values from B to A
+neg.s REG A, REG B
+move negation of REG B to A
+add.s $target,$r1,$r2
+sub.s $target,$r1,$r2
+
+mov.d REG A,REG B
+move double values from B to A
+
+w1 : .word 300
+lw load word
+lw $t0,w1
+
+mul multiply - > variation is mul.s, mul.d
+mul $target, $r1,$r2
+div divide
+div $target, $large, $small
+
+mfhi $a0
+get remainder in a0
+
+mflo $a0
+get quotient in a0 (same as div result)
+
+mtc1 move to coprocessor 1
+mtc1 $t0, $f1 -> moves whatever in t0 to f1
+cvt.s.w $f1,$f1 -> convert word to float 
+cvt.w.s reverts above step
+
+mfc1 $to, $f1 -> moves whatever in f1 to t0
+
+
+bge $t0,$t1,alias
+bgt $t0,$t1,alias
+ble $t0,$t1,alias
+blt $t0,$t1,alias
+
+beqz $t0,alias
+bnez $t0,alias
+
+
+j - unconditional jump
+loop:
+bgt $t1,$t3,exit # if count>n, exit	
+add $t0,$t0,$t1 # store sum
+addi $t1,$t1,1 # increment count
+j loop
+
+
+c.lt.s $f1,$f2 -> set flag if f1<f2
+bc1f alias -> if flag is not set then go to alias
+bc1t alias -> if flag is set then go to alias
+c.le.d 
+
+
+
+LAB 5
+
+swc1 $f0, 4($t4) # Mem[ $t4 + 4 ] = $f0; Store word(into RAM) from coprocessor 1.
+sdc1 $f0, 0($t4) # Mem[ $t4 + 0 ] = $f0; Mem[ $t4 + 4 ] = $f1 ; Store double(into RAM) from CP 1.
